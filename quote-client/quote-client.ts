@@ -5,6 +5,7 @@ import { QuoteClientValidationError } from './quote-client-validation.error.ts';
 export class QuoteClient implements QuoteClientInterface {
     #dailyUrl = 'https://quotes.rest/qod?language=en';
     #quoteSeparator = '-';
+    #quoteSemicolon = '"';
 
     async daily(): Promise<string> {
         let result: Response;
@@ -37,6 +38,6 @@ export class QuoteClient implements QuoteClientInterface {
             throw new QuoteClientValidationError(json);
         }
 
-        return quote.quote + this.#quoteSeparator + quote.author;
+        return this.#quoteSemicolon + quote.quote + this.#quoteSemicolon + ' ' + this.#quoteSeparator + quote.author;
     }
 }
