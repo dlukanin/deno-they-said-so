@@ -1,0 +1,22 @@
+name: CI
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: denoland/setup-deno@main
+        with:
+          deno-version: v1.x
+
+      - name: Lint
+        run: deno lint --unstable
+
+      - name: Test
+        run: deno test --allow-net
