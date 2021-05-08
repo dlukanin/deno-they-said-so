@@ -1,5 +1,5 @@
 import { assertEquals } from "https://deno.land/std@0.95.0/testing/asserts.ts";
-import { QuoteClient } from '../quote-client/quote-client.ts';
+import { QuoteClient } from '../module/quote-client/quote-client.ts';
 
 Deno.test('QuoteClient', async () => {
     const client = new QuoteClient();

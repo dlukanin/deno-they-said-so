@@ -5,7 +5,7 @@ Simple deno (https://deno.land) client for https://theysaidso.com/api/
 ## Usage
 
 ```typescript
-import {QuoteClient} from 'https://raw.githubusercontent.com/dlukanin/deno-they-said-so/main/mod.ts';
+import {QuoteClient} from 'https://raw.githubusercontent.com/dlukanin/deno-they-said-so/main/module/mod.ts';
 
 const client = new QuoteClient();
 
