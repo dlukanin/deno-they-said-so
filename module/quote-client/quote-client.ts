@@ -1,11 +1,13 @@
 import { QuoteClientInterface } from './quote-client.interface.ts';
 import { QuoteClientError, QuoteClientErrorEnum } from './quote-client.error.ts';
 import { QuoteClientValidationError } from './quote-client-validation.error.ts';
+import { QuoteClientRateLimitError } from './quote-client-rate-limit.error.ts';
 
 export class QuoteClient implements QuoteClientInterface {
     #dailyUrl = 'https://quotes.rest/qod?language=en';
     #quoteSeparator = '-';
     #quoteSemicolon = '"';
+    #rateLimitErrorCode = 429;
 
     async daily(): Promise<string> {
         let result: Response;
@@ -24,6 +26,10 @@ export class QuoteClient implements QuoteClientInterface {
             json = await res.json();
         } catch (e) {
             throw new QuoteClientError(QuoteClientErrorEnum.RESPONSE_PARSE, e);
+        }
+
+        if (json?.error?.code === this.#rateLimitErrorCode) {
+            throw new QuoteClientRateLimitError(json?.error?.message);
         }
 
         const quotes = json?.contents?.quotes;

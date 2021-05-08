@@ -18,6 +18,10 @@ You can also check examples folder - https://github.com/dlukanin/deno-they-said-
 
 You need --allow-net permission for running this module
 
+## Rate limit
+
+API can be rate limited. Methods throw `QuoteClientRateLimitError` is the limit is reached
+
 ## Plans
 
 - [x] Initial client version
